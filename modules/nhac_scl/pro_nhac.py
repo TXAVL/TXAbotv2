@@ -1083,7 +1083,7 @@ def handle_nhac_command(message, message_object, thread_id, thread_type, author_
             msg = Message(text=text, mention=mention)
             client.send(msg, thread_id, thread_type, ttl=60000)
             time.sleep(0)
-            client.sendLocalImage(song_image_path, thread_id, thread_type, width=width, height=height, ttl=600000)
+            client.sendLocalImage(song_image_path, thread_id, thread_type, width=width, height=height, ttl=1200000)
             time.sleep(0)
 
             if rotating_disc_url and cover_url:
@@ -1091,7 +1091,7 @@ def handle_nhac_command(message, message_object, thread_id, thread_type, author_
                                         thread_id=thread_id, thread_type=thread_type, ttl=600000)
                 time.sleep(0)
 
-            client.sendRemoteVoice(voiceUrl=upload_response, thread_id=thread_id, thread_type=thread_type, ttl=600000)
+            client.sendRemoteVoice(voiceUrl=upload_response, thread_id=thread_id, thread_type=thread_type, ttl=1200000)
         except Exception as e:
             print(f"❌ Lỗi khi gửi bài hát: {e}")
             text = f"🚦 {username}, lỗi khi gửi bài hát: {str(e)}"
