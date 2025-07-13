@@ -21,7 +21,7 @@ from colorsys import hsv_to_rgb, rgb_to_hsv
 
 user_states = {}
 client_id_cache = None
-SEARCH_TIMEOUT = 120
+SEARCH_TIMEOUT = 180
 
 BACKGROUND_PATH = "background/"
 CACHE_PATH = "modules/cache/"

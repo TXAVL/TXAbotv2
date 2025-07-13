@@ -65,7 +65,7 @@ def news(bot, message_object, author_id, thread_id, thread_type, command):
                     response = "❌Ban khong phai admin bot!"
                 else:
                     response = handle_news_off(bot, thread_id)
-                bot.replyMessage(Message(text=response), thread_id=thread_id, thread_type=thread_type, replyMsg=message_object)
+                bot.replyMessage(Message(text=response), message_object, thread_id=thread_id, thread_type=thread_type)
                 return
             
             if not (settings.get("news", {}).get(thread_id, False)):
@@ -673,7 +673,7 @@ def generate_menu_image(bot, author_id, thread_id, thread_type):
             f"Hi, {greeting_name}",
             f"💞 Chao Ban, toi co the giup gi cho ban a?",
             f"{bot.prefix}news on/off: 🚀 Bat/Tat tinh nang",
-            "😁 Bot San Sang Phuc 🖤",
+            "😁 Bot Trợ Lý Đa Năng Sẵn Sàng Phục Vụ 💖",
             f"🤖Bot: {bot.me_name} 💻Version: {bot.version} 📅Update {bot.date_update}"
         ]
 

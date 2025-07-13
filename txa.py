@@ -46,6 +46,7 @@ from modules.stkxp.pro_stkxp import handle_stkxp_command
 
 from modules.reghotmail.pro_reghotmail import handle_reghotmail_command
 from modules.doff.pro_doff import handle_doff_command
+from modules.autosend.pro_autosend import handle_autosend_command
 from modules.AI_GEMINI.pro_gemini import handle_chat_command
 from modules.anhgai.pro_anhgai import handle_anhgai_command
 from modules.cauthinh.pro_thinh import handle_tha_thinh_command
@@ -1594,8 +1595,8 @@ class bot(ZaloAPI):
         self.used_codes = {}
         self.allowed_groups = set()
         self.stop_event = threading.Event()
-        self.version ="2.0"
-        self.date_update ='12-07-25'
+        self.version ="2.1"
+        self.date_update ='13-07-25'
         self.me_name = self.fetchAccountInfo().profile.displayName
         self.group_info_cache = {}
         all_group = self.fetchAllGroups()
@@ -1722,6 +1723,8 @@ class bot(ZaloAPI):
                 handle_tha_thinh_command(message, message_object, thread_id, thread_type, author_id, self)
             elif message_lower.startswith(f"{prefix}ngl"):
                 handle_ngl_thinh_command(message, message_object, thread_id, thread_type, author_id, self)
+            elif message_lower.startswith(f"{prefix}autosend"):
+                handle_autosend_command(message, message_object, thread_id, thread_type, author_id, self)
             elif message_lower.startswith(f"{prefix}zl"):
                 handle_menu_zl_command(message, message_object, thread_id, thread_type, author_id, self)
             elif message_lower.startswith(f"{prefix}hiden"):

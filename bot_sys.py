@@ -1264,7 +1264,7 @@ def generate_menu_image(bot, author_id, thread_id, thread_type):
             f"Hi, {greeting_name}",
             f"💞 Chao mung đen voi menu 🤖 BOT",
             f"{bot.prefix}bot on/off: 🚀 Bat/Tat tinh nang",
-            "😁 Bot San Sang Phuc 🖤",
+            "😁 Bot San Sang Phuc Vu🖤",
             f"🤖Bot: {bot.me_name} 💻Version: {bot.version} 📅Update {bot.date_update}"
         ]
 

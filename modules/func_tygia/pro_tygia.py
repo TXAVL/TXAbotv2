@@ -16,6 +16,8 @@ BACKGROUND_PATH = "background/"
 CACHE_PATH = "modules/cache/"
 OUTPUT_IMAGE_PATH = os.path.join(CACHE_PATH, "tygia.png")
 
+SUPPORTED_CURRENCIES = ['USD', 'VND', 'EUR', 'GBP', 'JPY', 'CNY', 'KRW', 'SGD']
+
 def get_dominant_color(image_path):
     try:
         if not os.path.exists(image_path):
@@ -181,7 +183,7 @@ def generate_menu_image(bot, author_id, thread_id, thread_type):
                 draw_text_with_shadow(draw, (icon_x, time_y - 8), time_icon, font_icon, icon_color)
                 draw.text((time_x, time_y), time_text, font=font_time, fill=time_color)
             except Exception as e:
-                print(f"❌ Lỗi vẽ thời gian lên ảnh: {e}")
+                print(f"❌ Lỗi vẽ thởi gian lên ảnh: {e}")
                 draw_text_with_shadow(draw, (time_x - 75, time_y - 8), "⏰", font_icon, (255, 255, 255, 255))
                 draw.text((time_x, time_y), " ??;??", font=font_time, fill=time_color)
 
@@ -210,7 +212,7 @@ def generate_menu_image(bot, author_id, thread_id, thread_type):
             f"Hi, {greeting_name}",
             f"💞 Chào Bạn, tôi có thể giúp gì cho bạn ạ?",
             f"{bot.prefix}tygia on/off: 🚀 Bật/Tắt tính năng",
-            "😁 Bot Sẵn Sàng Phục 🖤",
+            "😁 Bot Sẵn Sàng Phục Vụ🖤",
             f"🤖Bot: {bot.me_name} 💻Version: {bot.version} 📅Update {bot.date_update}"
         ]
 
@@ -359,6 +361,38 @@ def handle_tygia_off(bot, thread_id):
         return f"🚦Lệnh {bot.prefix}tygia đã Tắt ⭕️ trong nhóm này ✅"
     return "🚦Nhóm chưa có thông tin cấu hình tygia để ⭕️ Tắt 🤗"
 
+def get_exchange_rate(amount, from_currency, to_currency):
+    # Chuẩn hóa mã tiền tệ
+    from_currency = from_currency.upper()
+    to_currency = to_currency.upper()
+    
+    # Kiểm tra mã tiền tệ hợp lệ
+    if from_currency not in SUPPORTED_CURRENCIES or to_currency not in SUPPORTED_CURRENCIES:
+        return f"⚠️ Lỗi: Chỉ hỗ trợ các loại tiền tệ sau: {', '.join(SUPPORTED_CURRENCIES)}"
+    
+    try:
+        url = f"https://www.valutafx.com/vn/api/v2/rates/lookup?isoTo={to_currency}&isoFrom={from_currency}&amount={amount}&pageCode=Home"
+        response = requests.get(url).json()
+
+        if response.get("ErrorMessage"):
+            return f"⚠️ Lỗi: Không thể chuyển đổi từ {from_currency} sang {to_currency}. Vui lòng thử lại sau."
+        else:
+            converted_amount = response["Rate"]
+            formatted_result = BeautifulSoup(response["FormattedResult"], "html.parser").text
+            formatted_rate = BeautifulSoup(response["FormattedRates"], "html.parser").text
+            formatted_inverse_rate = BeautifulSoup(response["FormattedIndirectRates"], "html.parser").text
+            update_time = BeautifulSoup(response["FormattedDateTime"], "html.parser").text
+
+            result = (
+                f"\n💰 {amount} {from_currency} = {formatted_result}\n"
+                f"📌 Tỷ giá: {formatted_rate}\n"
+                f"🔄 Tỷ giá nghịch: {formatted_inverse_rate}\n"
+                f"🕒 {update_time}"
+            )
+            return result
+    except Exception as e:
+        return f"⚠️ Lỗi hệ thống: {str(e)}"
+
 def handle_hoan_doi_command(bot, message_object, author_id, thread_id, thread_type, command):
     def hoan_doi():
         settings = read_settings(bot.uid)
@@ -379,7 +413,7 @@ def handle_hoan_doi_command(bot, message_object, author_id, thread_id, thread_ty
                 response = "❌Bạn không phải admin bot!"
             else:
                 response = handle_tygia_off(bot, thread_id)
-            bot.replyMessage(Message(text=response), thread_id=thread_id, thread_type=thread_type, replyMsg=message_object)
+            bot.replyMessage(Message(text=response), message_object, thread_id=thread_id, thread_type=thread_type)
             return
         
         if not (settings.get("tygia", {}).get(thread_id, False)):
@@ -392,8 +426,19 @@ def handle_hoan_doi_command(bot, message_object, author_id, thread_id, thread_ty
             return
 
         try:
+            # Xử lý các ký hiệu và từ viết tắt thông dụng
+            currency_symbols = {
+                '$': 'USD',
+                '€': 'EUR',
+                '£': 'GBP',
+                '¥': 'JPY',
+                '₩': 'KRW',
+                'đ': 'VND',
+                'nd': 'CNY'
+            }
+            
             parts = command.split()
-            response = None  
+            response = None
 
             if len(parts) == 1:
                 response = (
@@ -401,18 +446,29 @@ def handle_hoan_doi_command(bot, message_object, author_id, thread_id, thread_ty
                     f"   ➜ {bot.prefix}tygia hoandoi [số cần đổi] [USD] [VND]: xem tỷ giá hoán đổi USD 💱\n"
                 )
             else:
-                if len(parts) < 5:
-                    response = "➜ ❌ Sai cú pháp! Dùng: tygia hoandoi [số cần đổi] [USD] [VND]"
+                if len(parts) < 4:
+                    response = f"⚠️ Sai cú pháp! Dùng: {bot.prefix}tygia hoandoi <số tiền> <tiền gốc> <tiền đích>\nVí dụ: {bot.prefix}tygia hoandoi 100 USD VND"
                 else:
                     action = parts[1].lower()
                     if action == 'hoandoi':
                         try:
                             amount = float(parts[2])
                             from_currency = parts[3].upper()
-                            to_currency = parts[4].upper()
+                            to_currency = parts[4].upper() if len(parts) > 4 else 'VND'
+                            
+                            # Chuẩn hóa mã tiền tệ từ ký hiệu/viết tắt
+                            from_currency = currency_symbols.get(from_currency.lower(), from_currency)
+                            to_currency = currency_symbols.get(to_currency.lower(), to_currency)
+                            
+                            # Xử lý trường hợp đặc biệt khi dùng ký hiệu Đ cho VND
+                            if from_currency == 'Đ':
+                                from_currency = 'VND'
+                            if to_currency == 'Đ':
+                                to_currency = 'VND'
+                            
                             response = get_exchange_rate(amount, from_currency, to_currency)
                         except ValueError:
-                            response = "➜ ❌ Số tiền cần đổi phải là số hợp lệ."
+                            response = "⚠️ Số tiền không hợp lệ! Vui lòng nhập số."
 
             if response is not None:
                 if len(parts) == 1:
@@ -440,28 +496,7 @@ def handle_hoan_doi_command(bot, message_object, author_id, thread_id, thread_ty
                     bot.replyMessage(Message(text=response), message_object, thread_id=thread_id, thread_type=thread_type, ttl=100000)
         except Exception as e:
             print(f"Error: {e}")
-            bot.replyMessage(Message(text="➜ 🐞 Đã xảy ra lỗi gì đó 🤧"), message_object, thread_id=thread_id, thread_type=thread_type)
+            bot.replyMessage(Message(text=f"⚠️ Lỗi: {str(e)}"), message_object, thread_id=thread_id, thread_type=thread_type)
 
     thread = Thread(target=hoan_doi)
     thread.start()
-    
-def get_exchange_rate(amount, from_currency, to_currency):
-    url = f"https://www.valutafx.com/vn/api/v2/rates/lookup?isoTo={to_currency}&isoFrom={from_currency}&amount={amount}&pageCode=Home"
-    response = requests.get(url).json()
-
-    if response.get("ErrorMessage"):
-        return "⚠️ Lỗi: Không thể lấy dữ liệu tỷ giá."
-    else:
-        converted_amount = response["Rate"]
-        formatted_result = BeautifulSoup(response["FormattedResult"], "html.parser").text
-        formatted_rate = BeautifulSoup(response["FormattedRates"], "html.parser").text
-        formatted_inverse_rate = BeautifulSoup(response["FormattedIndirectRates"], "html.parser").text
-        update_time = BeautifulSoup(response["FormattedDateTime"], "html.parser").text
-
-        result = (
-            f"\n💰 {amount} {from_currency} = {formatted_result}\n"
-            f"📌 Tỷ giá: {formatted_rate}\n"
-            f"🔄 Tỷ giá nghịch: {formatted_inverse_rate}\n"
-            f"🕒 {update_time}"
-        )
-        return result

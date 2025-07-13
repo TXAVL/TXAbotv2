@@ -220,6 +220,7 @@ def generate_menu_image(bot, author_id, thread_id, thread_type):
             f"💞 Chao mung đen menu 📢 Pinterest",
             f"{bot.prefix}pin on/off: 🚀 Bat/Tat tinh nang",
             "😁 Bot San Sang Phuc Vu🖤",
+            f"🤖 Bot Trợ Lý Đa Năng Sẵn Sàng Phục Vụ 💖",
             f"🤖Bot: {bot.me_name} 💻Version: {bot.version} 📅Update {bot.date_update}"
         ]
 
@@ -232,6 +233,7 @@ def generate_menu_image(bot, author_id, thread_id, thread_type):
             color2,
             last_lines_color,
             last_lines_color,
+            last_lines_color,
             last_lines_color
         ]
 
@@ -240,6 +242,7 @@ def generate_menu_image(bot, author_id, thread_id, thread_type):
             font_text_big,
             font_text_bot,
             font_text_bot,
+            font_text_small,
             font_text_small
         ]
 

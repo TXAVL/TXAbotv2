@@ -211,7 +211,7 @@ def generate_menu_image(bot, author_id, thread_id, thread_type):
             f"Hi, {greeting_name}",
             f"💞 Chao mung đen menu ☘️ Pixiv tim Anime",
             f"{bot.prefix}pix on/off: 🚀 Bat/Tat tinh nang",
-            "😁 Bot San Sang Phuc 🖤",
+            "🤖 Bot Trợ Lý Đa Năng Sẵn Sàng Phục Vụ 💖",
             f"🤖Bot: {bot.me_name} 💻Version: {bot.version} 📅Update {bot.date_update}"
         ]
 

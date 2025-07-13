@@ -274,7 +274,7 @@ def generate_menu_image(bot, author_id, thread_id, thread_type):
             f"Hi, {greeting_name}",
             f"💞 Chao Ban, toi co the giup gi cho ban a?",
             f" ",
-            "😁 Bot San Sang Phuc 🖤",
+            "😁 Bot Trợ Lý Đa Năng Sẵn Sàng Phục Vụ 💖",
             f"🤖Bot: {bot.me_name} 💻Version: {bot.version} 📅Update {bot.date_update}"
         ]
 

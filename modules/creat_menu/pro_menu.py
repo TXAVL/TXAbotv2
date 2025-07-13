@@ -46,7 +46,8 @@ def handle_menu_commands(message, message_object, thread_id, thread_type, author
         f"➜ 🙀 Tạo tài khoản ({bot.prefix}stkxp)\n",
         f"➜ 👁 Tạo QR chuyển khoản ({bot.prefix}qrbank)\n",
         f"➜ 🧠 Spam NGL ({bot.prefix}ngl)\n",
-        f"➜ 📣 Xem thông tin nhóm ({bot.prefix}group)\n"
+        f"➜ 📣 Xem thông tin nhóm ({bot.prefix}group)\n",
+        f"➜ 📣 Tự động gửi tin nhắn ({bot.prefix}autosend)\n"
     ])
 
     image_path = generate_menu_image(bot, author_id, thread_id, thread_type)
