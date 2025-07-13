@@ -1,0 +1,26 @@
+{
+  "name": "TXAbotv2 Codespace",
+
+  // Base container image – để dùng môi trường Ubuntu
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+  // Mở port nếu bạn cần chạy bot test
+  "forwardPorts": [3000],
+
+  // Cài extension và settings sẵn cho VS Code
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "emjio.git-auto-commit"  // Tự động commit + push
+      ],
+      "settings": {
+        // Commit sau 5 phút không thay đổi
+        "git-auto-commit.commitTimeInterval": 5,
+        // Tự động push lên remote
+        "git-auto-commit.autoPush": true,
+        // Tên tác giả mặc định nếu chưa cấu hình git
+        "git-auto-commit.commitAuthor": "TXAbot <txa@bot.dev>"
+      }
+    }
+  }
+}
