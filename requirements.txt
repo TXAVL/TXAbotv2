@@ -1,0 +1,15 @@
+ 
+requests
+pillow
+colorama
+beautifulsoup4
+pyfiglet
+zlapi
+websockets
+aiohttp
+attrs
+emoji
+psutil
+removebg
+gTTS
+deep-translator
