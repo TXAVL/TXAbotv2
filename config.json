@@ -1,14 +1,26 @@
 {
-    "data": [
-        {
-            "prefix": "!",
-            "session_cookies": {"ozi":"2000.SSZzejyD6zOgdh2mtnLQWYQN_RAG01ICFjMXe9fFM8yvd-YccK5LZZwIhAETG1YAEf-fhfbB78S.1","_ga_1J0YGQPT22":"GS2.1.s1751601511$o1$g1$t1751601587$j56$l0$h0","_ga":"GA1.2.443332693.1751538878","_ga_RYD7END4JE":"GS2.2.s1751894234$o1$g0$t1751894234$j60$l0$h0","__zi":"3000.SSZzejyD6zOgdh2mtnLQWYQN_RAG01ICFjIXe9fEM8WwcUwXcKzUXN6PxApKIrg8T9Jefp0r.1","__zi-legacy":"3000.SSZzejyD6zOgdh2mtnLQWYQN_RAG01ICFjIXe9fEM8WwcUwXcKzUXN6PxApKIrg8T9Jefp0r.1","app.event.zalo.me":"1929088958951518796","_zlang":"vn","_gid":"GA1.2.712175517.1752335757","zpsid":"-P8q.440357158.14.Uxsj50zSKXOf3MqC0rnI5del828xR64ZE6rdBgIXk-wVmntB3i7NP6TSKXO","zpw_sek":"za9N.440357158.a0.HgyCDuCwtcobQ-5seZhURFWOkmUX0Fm_jKBn0ijTl3R6Lhq5y72sMk9ClG_21-DE_f4ZXNkgGIDUEq7fyLBUR0"}
-            "imei": "824e3485-7bbf-4f5d-a87a-8c8faa65ef58-0fe6feb54289f4c67027ec06cc2131f8",
-            "is_main_bot": true,
-            "username": "TXA",
-            "author_id": "1512279441003061662",
-            "status": true,
-            "box_id": "3011147812260030891"
-        }
-    ]
+  "data": [
+    {
+      "prefix": "!",
+      "session_cookies": {
+        "ozi": "2000.SSZzejyD6zOgdh2mtnLQWYQN_RAG01ICFjMXe9fFM8yvd-YccK5LZZwIhAETG1YAEf-fhfbB78S.1",
+        "_ga_1J0YGQPT22": "GS2.1.s1751601511$o1$g1$t1751601587$j56$l0$h0",
+        "_ga": "GA1.2.443332693.1751538878",
+        "_ga_RYD7END4JE": "GS2.2.s1751894234$o1$g0$t1751894234$j60$l0$h0",
+        "__zi": "3000.SSZzejyD6zOgdh2mtnLQWYQN_RAG01ICFjIXe9fEM8WwcUwXcKzUXN6PxApKIrg8T9Jefp0r.1",
+        "__zi-legacy": "3000.SSZzejyD6zOgdh2mtnLQWYQN_RAG01ICFjIXe9fEM8WwcUwXcKzUXN6PxApKIrg8T9Jefp0r.1",
+        "app.event.zalo.me": "1929088958951518796",
+        "_zlang": "vn",
+        "_gid": "GA1.2.712175517.1752335757",
+        "zpsid": "-P8q.440357158.14.Uxsj50zSKXOf3MqC0rnI5del828xR64ZE6rdBgIXk-wVmntB3i7NP6TSKXO",
+        "zpw_sek": "za9N.440357158.a0.HgyCDuCwtcobQ-5seZhURFWOkmUX0Fm_jKBn0ijTl3R6Lhq5y72sMk9ClG_21-DE_f4ZXNkgGIDUEq7fyLBUR0"
+      },   
+      "imei": "824e3485-7bbf-4f5d-a87a-8c8faa65ef58-0fe6feb54289f4c67027ec06cc2131f8",
+      "is_main_bot": true,
+      "username": "TXA",
+      "author_id": "1512279441003061662",
+      "status": true,
+      "box_id": "3011147812260030891"
+    }
+  ]
 }
