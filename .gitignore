@@ -1,0 +1,22 @@
+# Bỏ qua các file biên dịch Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Bỏ qua thư mục cache nhạc và ảnh
+modules/nhac_scl/cache/
+
+# Bỏ qua các loại file media không cần thiết
+*.mp3
+*.m4r
+*.jpg
+*.png
+
+# Bỏ qua file hệ thống (Windows, macOS)
+.DS_Store
+Thumbs.db
+
+# VS Code config
+.vscode/
+
+# Khác (tuỳ vào dự án bạn có thể thêm vào đây)
